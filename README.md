@@ -41,16 +41,16 @@ A estrutura de pastas reflete a separação de responsabilidades:
 ## Tecnologias 
 - **Linguagem:** Go (Golang) 1.24+
 - **Bibliotecas:** Standard Library (net/http, sync, encoding/csv, flag).
-
+- Docker
 ## Pré-requisitos
 
 - Tenha o [Go](https://go.dev/doc/install) instalado na sua máquina.
-
+- Tenha o [Docker](https://docs.docker.com/) instalado na sua máquina.
 ## 1. Clone o repositório
 
 ```bash
-git clone https://github.com/EberteSampaio/cli-health-check.git
-cd cli-health-check
+  git clone https://github.com/EberteSampaio/cli-health-check.git
+  cd cli-health-check
 ```
 
 ## 2. Prepare o arquivo de entrada
@@ -63,17 +63,17 @@ https://github.com
 https://stackoverflow.com
 https://site-inexistente-teste.com
 ```
-## 3. Execute
+
+## 3. Rode a imagem docker
+
+```bash
+  docker build -t cli-healthcheck .
+```
+## 4. Execute
 Rode o projeto apontando para o arquivo: 
 
 ```bash
-go run cmd/cli/main.go -file sites.csv
-```
-ou compile: 
-
-```bash
-go build -o health-checker cmd/cli/main.go
-./health-checker -file sites.csv
+  docker run --rm -v caminho-omitido/sites.csv:/app/sites.csv cli-healthcheck -file sites.csv
 ```
 
 ## Exemplo de Saída
@@ -100,6 +100,6 @@ go build -o health-checker cmd/cli/main.go
 
 - [ ] Salvar o relatório de saída em um arquivo JSON.
 
-- [ ] Dockerizar a aplicação.
+- [x] Dockerizar a aplicação.
 
 Desenvolvido por [Eberte Sampaio](https://github.com/EberteSampaio)
