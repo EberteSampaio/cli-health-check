@@ -10,6 +10,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /app/cli-healthcheck ./cmd
 
 FROM scratch
 WORKDIR /app
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /app/cli-healthcheck .
 
 ENTRYPOINT ["./cli-healthcheck"]
